@@ -1,3 +1,4 @@
+import 'package:bilheteria_panucci/models/movie.dart';
 import 'package:bilheteria_panucci/services/movies_api.dart';
 import 'package:bloc/bloc.dart';
 
@@ -12,10 +13,10 @@ class HomeCubit extends Cubit<HomeStates> {
     emit(HomeLoading());
      
     try {
-      final movies = _homeService.fetchMovies();
-      emit(HomeSuccess());
+      final movies = await _homeService.fetchMovies();
+      emit(HomeSuccess(movies));
     } catch (e) {
-      emit(HomeError());
+      emit(HomeError('Ocorreu um erro ao buscar a lista de filmes.'));
     }
   }
 }
