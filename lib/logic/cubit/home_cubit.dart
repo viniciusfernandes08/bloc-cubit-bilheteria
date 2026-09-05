@@ -19,4 +19,15 @@ class HomeCubit extends Cubit<HomeStates> {
       emit(HomeError('Ocorreu um erro ao buscar a lista de filmes.'));
     }
   }
+
+  Future<void> getMoviesByGenre(String genre) async {
+    emit(HomeLoading());
+     
+    try {
+      final movies = await _homeService.fetchMoviesByGenre(genre);
+      emit(HomeSuccess(movies));
+    } catch (e) {
+      emit(HomeError('Ocorreu um erro ao buscar esse gênero.'));
+    }
+  }
 }
