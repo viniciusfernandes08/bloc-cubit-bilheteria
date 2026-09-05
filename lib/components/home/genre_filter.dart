@@ -1,6 +1,8 @@
 import 'package:bilheteria_panucci/logic/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 
+import 'list_genres.dart';
+
 class GenreFilter extends StatefulWidget {
   const GenreFilter({Key? key, required this.homeCubit}) : super(key: key);
 
@@ -11,18 +13,6 @@ class GenreFilter extends StatefulWidget {
 }
 
 class _GenreFilterState extends State<GenreFilter> {
-  static final List<String> listGenres = [
-    'Todos',
-    'Ação',
-    'Comédia',
-    'Drama',
-    'Romance',
-    'Documentário',
-    'Suspense',
-    'Terror',
-    'Ficção Científica'
-  ];
-
   String dropdownValue = listGenres.first;
 
   @override
