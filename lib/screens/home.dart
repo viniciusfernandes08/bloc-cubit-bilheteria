@@ -18,6 +18,7 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
+    homeCubit.getMovies();
     super.initState();
   }
 
@@ -54,23 +55,26 @@ class _HomeState extends State<Home> {
                       ),
                       itemBuilder: (context, index) {
                         return MovieCard(
-                          movie: Movie(
-                            name: "James Bond", 
-                            classification: Classification.naoRecomendado12, 
-                            duration: "1h 22min", 
-                            sinopse: "James Bond é um agente", 
-                            genre: "Suspense", 
-                            imageURI: null, 
-                            sessions: ["18:00"],
-                          ),
-                        );    
+                          movie: state.movies[index],
+                        );
                       },
-                      itemCount: 5,
+                      itemCount: state.movies.length,
                     );
                   } else if (state is HomeError) {
-                    return const SliverFillRemaining(
-                      child: Center(
-                        child: Text("Ocorreu um erro ao buscar a lista de filmes."),
+                    return SliverFillRemaining(
+                      child: Column (
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.not_interested, 
+                            size: 30.0,
+                            color: Colors.red,
+                          ),
+                          const SizedBox(
+                            height: 16.0,
+                          ),
+                          Text(state.error),
+                        ]
                       ),
                     );
                   } else {
